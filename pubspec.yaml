@@ -43,6 +43,9 @@ dependencies:
   equatable: ^2.0.5
   get_it: ^7.7.0
   firebase_core: ^2.24.2
+  connectivity_plus: ^6.0.5
+  google_fonts: ^6.2.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +70,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+  - lib/src/core/assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
