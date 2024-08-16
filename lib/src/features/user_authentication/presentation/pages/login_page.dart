@@ -2,13 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:totalx_assessment/src/core/assets/app_texts.dart';
 import 'package:totalx_assessment/src/features/user_authentication/presentation/bloc/auth_bloc.dart';
 import 'package:totalx_assessment/src/features/user_authentication/presentation/bloc/auth_event.dart';
 import 'package:totalx_assessment/src/features/user_authentication/presentation/bloc/auth_state.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _phoneNumberController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _phoneNumberController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +49,7 @@ class LoginPage extends StatelessWidget {
                   61.verticalSpace,
                   Center(
                       child: Image.asset(
-                    'lib/src/core/assets/images/loginimg.png',
+                    logInImagePath,
                     width: 130.w,
                     height: 102.74,
                   )),
@@ -71,7 +84,7 @@ class LoginPage extends StatelessWidget {
                       style: GoogleFonts.montserrat(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xff000000),
+                        color: blackColor,
                       ),
                       text: 'By Continuing, I agree to TotalX\’s ',
                       children: [
@@ -79,21 +92,21 @@ class LoginPage extends StatelessWidget {
                             style: GoogleFonts.montserrat(
                               fontSize: 11.sp,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xff2873F0),
+                              color: blueColor,
                             ),
                             text: 'Terms and condition '),
                         TextSpan(
                             style: GoogleFonts.montserrat(
                               fontSize: 11.sp,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xff000000),
+                              color: blackColor,
                             ),
                             text: '& '),
                         TextSpan(
                             style: GoogleFonts.montserrat(
                               fontSize: 11.sp,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xff2873F0),
+                              color: blueColor,
                             ),
                             text: "privacy policy")
                       ],
@@ -111,17 +124,16 @@ class LoginPage extends StatelessWidget {
                     },
                     child: state is AuthLoading
                         ? Padding(
-                          padding:  const EdgeInsets.all(7).r,
-                          child: const CircularProgressIndicator(
-                            strokeWidth: 2,
-                              color: Color(0xffFFFFFF)),
-                        )
+                            padding: const EdgeInsets.all(7).r,
+                            child: const CircularProgressIndicator(
+                                strokeWidth: 2, color: whiteColor),
+                          )
                         : Text(
                             'Get OTP',
                             style: GoogleFonts.montserrat(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xffFFFFFF),
+                              color: whiteColor,
                             ),
                           ),
                   ),

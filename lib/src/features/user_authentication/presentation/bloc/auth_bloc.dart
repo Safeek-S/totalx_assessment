@@ -81,7 +81,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } else if (result.statusCode == StatusCode.failure) {
           emit(AuthError(message: result.message));
         } else if (result.statusCode == StatusCode.success) {
-           _handleSentOtp(); // Start countdown after OTP is sent
+           _handleSentOtp(); 
           emit(OtpSent(
               verificationId: result.data!, phoneNumber: phoneNumber));
         }
@@ -103,7 +103,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await Future.delayed(const Duration(seconds: 1));
     _start--;
 
-    // Check if the emitter is still active before emitting
+  
     if (emit.isDone) return;
 
     emit(OtpCountdownState(_start));

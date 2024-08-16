@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:totalx_assessment/src/core/assets/app_texts.dart';
 import 'package:totalx_assessment/src/core/utils/utils.dart';
 import 'package:totalx_assessment/src/features/user_authentication/presentation/bloc/auth_bloc.dart';
 import 'package:totalx_assessment/src/features/user_authentication/presentation/bloc/auth_event.dart';
@@ -39,9 +40,9 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context)!.settings.arguments as List<String>;
-    // verificationId = args[0];
-    // phoneNumber = args[1];
+    final args = ModalRoute.of(context)!.settings.arguments as List<String>;
+    verificationId = args[0];
+    phoneNumber = args[1];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -50,7 +51,7 @@ class _OtpPageState extends State<OtpPage> {
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              print('done da buda');
+          Navigator.pushNamed(context, '/dashboard');
             }
           },
           builder: (context, state) {
@@ -71,7 +72,7 @@ class _OtpPageState extends State<OtpPage> {
                   42.verticalSpace,
                   Center(
                     child: Image.asset(
-                      "lib/src/core/assets/images/otpimg.png",
+                     otpImagePath,
                       width: 140.w,
                       height: 140.h,
                     ),
@@ -82,7 +83,7 @@ class _OtpPageState extends State<OtpPage> {
                     style: GoogleFonts.montserrat(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xff333333)),
+                        color: greyishBlackColor),
                   ),
                   24.verticalSpace,
                   Text(
@@ -116,7 +117,7 @@ class _OtpPageState extends State<OtpPage> {
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xff333333),
+                            color: greyishBlackColor,
                           ),
                           children: [
                             TextSpan(
@@ -126,7 +127,7 @@ class _OtpPageState extends State<OtpPage> {
                                 decoration: TextDecoration.underline,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xff2873F0),
+                                color: blueColor,
                               ),
                             )
                           ]),
@@ -156,7 +157,7 @@ class _OtpPageState extends State<OtpPage> {
                         style: GoogleFonts.montserrat(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xffFFFFFF),
+                          color: whiteColor,
                         ),
                       ),
                     ),

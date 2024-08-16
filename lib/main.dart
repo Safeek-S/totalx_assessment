@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:totalx_assessment/src/core/injections.dart';
 
 import 'src/app.dart';
+import 'src/features/user_authentication/presentation/bloc/auth_bloc.dart';
+import 'src/features/users/presentation/bloc/user_bloc.dart';
+import 'src/features/users/presentation/bloc/user_event.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +23,17 @@ Future<void> main() async {
               projectId: "assessment-977fa"))
       : await Firebase.initializeApp();
   await init();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+   providers: [
+           BlocProvider<AuthBloc>(
+          create: (_) => sl<AuthBloc>(),
+        ),
+          BlocProvider<UserBloc>(
+          create: (_) => sl<UserBloc>()..add(GetUsersEvent(offset: 0, limit: 10)),
+        ),
+   ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,8 +50,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'User App',
           theme: ThemeData(
-           
-            colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff100E09)),
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: const Color(0xff100E09)),
             useMaterial3: true,
           ),
           home: const App(),
